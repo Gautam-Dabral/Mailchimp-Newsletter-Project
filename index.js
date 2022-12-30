@@ -44,11 +44,11 @@ app.post("/", function (req, res) {
         server: process.env.MAILCHIMP_SERVER,
     });
 
-    const listID = "503b9f22a2"
+    const listID = process.env.LIST_ID
     const run = async () => {
         const response = await client.lists.batchListMembers(listID, jsonData);
         if (response.errors.length !== 0) {
-            const error_msg = "Error Code" + " : " + response.errors[0].error_code + " - " + response.errors[0].error
+            const error_msg = "Error Code" + " : " + response.errors[0].error_code + " - " + response.errors[0].error + "For testing, Try using '@gmail' instead of a fake domain"
             res.send(error_msg)
         } else {
             res.redirect("/success.html");
